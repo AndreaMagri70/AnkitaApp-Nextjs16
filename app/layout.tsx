@@ -27,7 +27,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header>iBuiltThis</header>
         {children}
+        <footer>iBuiltThis Inc. All right reserved.</footer>
       </body>
     </html>
   );
