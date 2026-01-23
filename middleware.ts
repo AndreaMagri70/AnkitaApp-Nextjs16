@@ -1,10 +1,9 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default clerkMiddleware((auth, req) => {
-  // Questo log ti aiuterà a vedere nei log di Vercel se la chiave arriva
-  if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
-    console.error("ERRORE CRITICO: La chiave Clerk non è visibile nel Middleware!");
-  }
+export default clerkMiddleware({
+  // Forziamo il middleware a leggere le chiavi direttamente dalle variabili d'ambiente di sistema
+  publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+  secretKey: process.env.CLERK_SECRET_KEY,
 });
 
 export const config = {
