@@ -16,8 +16,8 @@ interface Product {
     name: string;
     description: string;
     tags: string[];
-    votes: number;
-    isFeatured: boolean;
+    vote_count: number;
+    // isFeatured: boolean;
 }
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -32,7 +32,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 <CardTitle className="text-lg group-hover:text-primary transition-colors">
                   {product.name}
                 </CardTitle>
-                {product.votes > 100 && (
+                {product.vote_count > 100 && (
                   <Badge className="gap-1 bg-primary text-primary-foreground">
                     <StarIcon className="size-3 fill-current" />
                     Featured

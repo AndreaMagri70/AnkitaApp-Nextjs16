@@ -26,7 +26,8 @@ export default function RootLayout({
 
   return (
     <ClerkProvider publishableKey={publishableKey}>
-    <html lang="en">
+    {/* Aggiungi suppressHydrationWarning qui */}
+      <html lang="en" suppressHydrationWarning>
       <body
         className={`${outfit.className} antialiased`}
       >

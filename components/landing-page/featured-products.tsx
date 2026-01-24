@@ -25,10 +25,19 @@ export default async function FeaturedProducts() {
                     </Button>
                 </div>
                 <div className="grid-wrapper">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+  {featuredProducts.map((product) => (
+    <ProductCard 
+      key={product.id} 
+      // Creiamo un nuovo oggetto che ha SIA i nomi del database SIA quelli che la card si aspetta
+      product={{
+        ...product,
+        vote_count: product.voteCount, // Se la card vuole vote_count
+        votes: product.voteCount || [],    // Se la card vuole l'array votes
+        isFeatured: true               // Visto che siamo in FeaturedProducts
+      } as any} 
+    />
+  ))}
+</div>
             </div>
 
         </section>
