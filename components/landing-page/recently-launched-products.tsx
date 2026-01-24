@@ -2,41 +2,36 @@ import { CalendarIcon, RocketIcon } from "lucide-react";
 import SectionHeader from "../common/section-header";
 import ProductCard from "../products/product-card";
 import EmptyState from "../common/empty-state";
+import { getRecentlyLaunchedProducts } from "@/lib/products/product-select";
 
-export default function RecentlyLaunchedProducts() {
-    const RecentlyLaunchedProducts = [
-        {
-            id: 1,
-            name: "ParityKit",
-            description: "A toolkit for creating parity products",
-            tags: ["SaaS", "Pricing", "Global"],
-            votes: 615,
-            isFeatured: true,
-        },
-        {
-            id: 2,
-            name: "Modern Full Stack Next.js Course",
-            description: "Learn to build production-ready full stack apps with Next.js",
-            tags: ["Next.js", "Full-Stack", "Course"],
-            votes: 124,
-            isFeatured: false,
-        },
-
-    ]
+export default async function RecentlyLaunchedProducts() {
+  const RecentlyLaunchedProducts = await
+    getRecentlyLaunchedProducts();
 
 
-    return (
-        <section className="py-20 ">
-            <div className="wrapper">
-                <SectionHeader
-                    title="Recently Launched"
-                    icon={RocketIcon}
-                    description="Discover the lastest products from our community"
-                />
-                 {RecentlyLaunchedProducts.length > 0 ? (
+  return (
+    <section className="py-20 ">
+      <div className="wrapper">
+        <SectionHeader
+          title="Recently Launched"
+          icon={RocketIcon}
+          description="Discover the lastest products from our community"
+        />
+        {RecentlyLaunchedProducts.length > 0 ? (
           <div className="grid-wrapper">
             {RecentlyLaunchedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={{
+                  ...product,
+                  // Creiamo la proprietà 'vote_count' usando il valore di 'voteCount'
+                  vote_count: product.voteCount,
+
+                  // Se TypeScript si lamenta anche di altri campi (come 'website_url'), aggiungili qui:
+                  website_url: product.websiteUrl,
+                } as any} // 'as any' serve per bypassare l'errore mentre sistemi i tipi
+              />
+              // <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
@@ -45,7 +40,7 @@ export default function RecentlyLaunchedProducts() {
             icon={CalendarIcon}
           />
         )}
-            </div>
-        </section>
-    );
+      </div>
+    </section>
+  );
 }
