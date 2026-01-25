@@ -29,8 +29,7 @@ export default function RootLayout({
     {/* Aggiungi suppressHydrationWarning qui */}
       <html lang="en" suppressHydrationWarning>
       <body
-        className={`${outfit.className} antialiased`}
-      >
+        className={`${outfit.className} antialiased`} suppressHydrationWarning>
         <Header />
 
         {children}

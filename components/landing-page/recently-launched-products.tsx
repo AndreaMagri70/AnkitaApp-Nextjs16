@@ -1,3 +1,4 @@
+"use cache";
 import { CalendarIcon, RocketIcon } from "lucide-react";
 import SectionHeader from "../common/section-header";
 import ProductCard from "../products/product-card";
