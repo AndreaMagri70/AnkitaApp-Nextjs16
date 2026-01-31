@@ -8,22 +8,13 @@ import {
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
-// import VotingButtons from "/voting-buttons";
-// import { ProductType } from "../types";
+import VotingButtons from "./voting-buttons";
+import { ProductType } from "@/types";
 
-interface Product {
-    id: number;
-    name: string;
-    description: string;
-    tags: string[];
-    vote_count: number;
-    // isFeatured: boolean;
-}
-
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: ProductType }) {
   const hasVoted = false;
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={`/products/${product.slug}`}>
       <Card className="group card-hover hover:bg-primary-foreground/10 border-solid border-gray-400 min-h-50">
         <CardHeader className="flex-1">
           <div className="flex items-start gap-4">
@@ -32,7 +23,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 <CardTitle className="text-lg group-hover:text-primary transition-colors">
                   {product.name}
                 </CardTitle>
-                {product.vote_count > 100 && (
+                {product.voteCount > 100 && (
                   <Badge className="gap-1 bg-primary text-primary-foreground">
                     <StarIcon className="size-3 fill-current" />
                     Featured
@@ -41,12 +32,12 @@ export default function ProductCard({ product }: { product: Product }) {
               </div>
               <CardDescription>{product.description}</CardDescription>
             </div>
-            
-            {/* <VotingButtons
+            {/** Voting buttons */}
+            <VotingButtons
               hasVoted={hasVoted}
               voteCount={product.voteCount}
               productId={product.id}
-            /> */}
+            />
           </div>
         </CardHeader>
         <CardFooter>
